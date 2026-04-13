@@ -1,7 +1,7 @@
 # Keylogger using standard C libraries.
 
 ## Disclaimer:
-    This project is here and has been created just for study purposes. I bear absolutely no responsibility of the misuse any piece of code written here.
+This project is here and has been created just for study purposes. I bear absolutely no responsibility of the misuse any piece of code written here.
 
 ## Project Structure
     .
