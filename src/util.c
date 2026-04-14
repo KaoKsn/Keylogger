@@ -28,6 +28,7 @@ int init_lookup_table(struct lkup_table *lk_table)
     if (keyfile == NULL) {
         perror("open");
         free(lk_table->lkup_table_nodes);
+        // Avoid dangling points. (free can be called anytime on the list).
         lk_table->lkup_table_nodes = NULL;
         return 1;
     }
@@ -57,6 +58,7 @@ int insert(struct lkup_table *lk_table, uint16_t code, char _ascii_char)
     lk_table_node->code = code;
     lk_table_node->_ascii_char = _ascii_char;
 
+    // Double the lookup table size.
     if (lk_table->c_entries == lk_table->t_entries) {
         struct lkup_table_node **tmp = realloc(lk_table->lkup_table_nodes, lk_table->t_entries * 2 * sizeof(struct lk_table_node *));
         if (tmp == NULL) {
@@ -64,8 +66,11 @@ int insert(struct lkup_table *lk_table, uint16_t code, char _ascii_char)
             // Don't free the lookup table, its alright to have a partial table.
             return EXIT_FAILURE;
         }
-        lk_table->lkup_table_nodes = tmp;
         lk_table->t_entries *= 2;
+        lk_table->lkup_table_nodes = tmp;
+        // Avoid conditional jump on unitialized values!!
+        for (uint32_t i = lk_table->c_entries; i < lk_table->t_entries; i++)
+            lk_table->lkup_table_nodes[i] = NULL;
     }
     lk_table->lkup_table_nodes[lk_table->c_entries++] = lk_table_node;
     return EXIT_SUCCESS;
