@@ -60,7 +60,7 @@ int insert(struct lkup_table *lk_table, uint16_t code, char _ascii_char)
 
     // Double the lookup table size.
     if (lk_table->c_entries == lk_table->t_entries) {
-        struct lkup_table_node **tmp = realloc(lk_table->lkup_table_nodes, lk_table->t_entries * 2 * sizeof(struct lk_table_node *));
+        struct lkup_table_node **tmp = realloc(lk_table->lkup_table_nodes, lk_table->t_entries * 2 * sizeof(struct lkup_table_node *));
         if (tmp == NULL) {
             free(lk_table_node);
             // Don't free the lookup table, its alright to have a partial table.
