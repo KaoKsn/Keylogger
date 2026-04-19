@@ -3,7 +3,7 @@
 Keylogger is a free software licensed under the [GPLv2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) license.
 
 ## Disclaimer:
-This project is here and has been created just for study purposes. I or anybody who might contribute to this project bear absolutely no responsibility of the misuse any piece of code written here.
+This project is here and has been created just for study purposes. I or anybody who might contribute to this project bear absolutely no responsibility for the misuse any piece of code written here.
 
 ----
 
@@ -21,9 +21,12 @@ This project is here and has been created just for study purposes. I or anybody 
     │   ├── keylogger.c
     │   └── util.c
     └── test
+        ├── keys
+        │   └── keyfile.txt
         └── test_find.c
 
-4 directories, 9 files
+5 directories, 10 files
+
 
 -----
 
