@@ -39,6 +39,11 @@ int init_lookup_table(struct lkup_table *lk_table)
         memset(key, 0, sizeof(key));
     }
 
+    // Free the extra slots.
+    for (uint32_t i = lk_table->c_entries; i < lk_table->t_entries; i++)
+        free(lk_table->lkup_table_nodes[i]);
+    lk_table->t_entries = lk_table->c_entries;
+
     // Sort the lookup table for binary search.
     qsort(lk_table->lkup_table_nodes, lk_table->c_entries, sizeof(lk_table->lkup_table_nodes[0]), sortfun);
     fclose(keyfile);
@@ -103,7 +108,7 @@ void free_lkup_table(struct lkup_table *lk_table)
 {
     if (lk_table) {
         if (lk_table->lkup_table_nodes) {
-            for (uint32_t i = 0; i < lk_table->t_entries; i++) {
+            for (uint32_t i = 0; i < lk_table->c_entries; i++) {
                 if (lk_table->lkup_table_nodes[i])
                     free(lk_table->lkup_table_nodes[i]);
             }
