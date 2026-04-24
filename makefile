@@ -1,6 +1,6 @@
 CC := gcc
 OPT := -O2
-CFLAGS := -Wall -Wextra -pedantic $(OPT) -g
+CFLAGS := -Wall -Wextra -pedantic $(OPT) -g -Wno-implicit-function-declaration
 TARGET_EXEC := main
 
 BUILD_DIR := ./build
