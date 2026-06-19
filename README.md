@@ -8,11 +8,11 @@ This project is here and has been created just for study purposes. I or anybody 
 ----
 
 ## Project Structure
-
     .
     ├── include
     │   ├── keylogger.h
     │   └── util.h
+    ├── keylogger.service
     ├── keys
     │   └── keyfile.txt
     ├── LICENSE
@@ -27,8 +27,7 @@ This project is here and has been created just for study purposes. I or anybody 
         ├── test_find.c
         └── test_lk_table.c
 
-6 directories, 11 files
-
+    6 directories, 12 files
 
 -----
 
@@ -42,8 +41,24 @@ This project is here and has been created just for study purposes. I or anybody 
 
 ## Build and Run
 ```bash
-	make
-	sudo ./build/main kbdeventfile
+make
+sudo ./build/main kbdeventfile
+```
+
+
+## Running as a systemd service.
+```bash
+# Build and place the binary in a path of your choice.
+# /usr/local/bin is a good option.
+sudo cp keylogger.service /etc/systemd/system/
+
+# Change the service file as per your requirement.
+sudo systemctl daemon-reload
+# *** If you want to run it every time your pc turns on. (not recommended)***
+# sudo systemctl enable
+sudo systemctl start keylogger
+
+sudo journalctl -u keylogger.service -f
 ```
 
 Write on any window you choose and see that the keys are being logged.
